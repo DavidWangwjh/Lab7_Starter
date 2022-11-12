@@ -58,7 +58,7 @@ function initializeServiceWorker() {
   // B5. TODO - In the event that the service worker registration fails, console
   //            log that it has failed.
       try {
-        const registration = await navigator.serviceWorker.register("./sw.js");
+        const registration = await navigator.serviceWorker.register("./sw.js", {scope: "./",});
         if (registration.active) {
             console.log("Service worker active");
         }
@@ -114,11 +114,11 @@ async function getRecipes() {
   //            article on fetch(). NOTE: Fetches are ASYNCHRONOUS, meaning that
   //            you must either use "await fetch(...)" or "fetch.then(...)". This
   //            function is using the async keyword so we recommend "await"
-        const response = await fetch(RECIPE_URLS[i]);
+        let response = await fetch(RECIPE_URLS[i]);
   // A7. TODO - For each fetch response, retrieve the JSON from it using .json().
   //            NOTE: .json() is ALSO asynchronous, so you will need to use
   //            "await" again
-        const recipe = await response.json();
+        let recipe = await response.json();
   // A8. TODO - Add the new recipe to the recipes array
         recipes.push(recipe);
   // A9. TODO - Check to see if you have finished retrieving all of the recipes,
